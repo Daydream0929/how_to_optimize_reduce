@@ -83,7 +83,26 @@ int main()
     dim3 grid_size(N / THREAD_PER_BLOCK, 1);
     dim3 block_size(THREAD_PER_BLOCK, 1);
 
+    cudaEvent_t start, stop;
+    CHECK(cudaEventCreate(&start));
+    CHECK(cudaEventCreate(&stop));
+    CHECK(cudaEventRecord(start));
+    cudaEventQuery(start);
+
     reduce0<<<grid_size, block_size>>>(d_x, d_out);
+    
+
+    CHECK(cudaEventRecord(stop));
+    CHECK(cudaEventSynchronize(stop));
+    float elapsed_time;
+    CHECK(cudaEventElapsedTime(&elapsed_time, start, stop));
+    printf("Time = %g ms.\n", elapsed_time);
+
+    // calculate the GB/s
+    printf("带宽 = %f GB/s.\n", 0.032 * 4 * 1000 / elapsed_time);
+
+    CHECK(cudaEventDestroy(start));
+    CHECK(cudaEventDestroy(stop));
 
     cudaMemcpy(out, d_out, N / THREAD_PER_BLOCK * sizeof(real), cudaMemcpyDeviceToHost);
 
