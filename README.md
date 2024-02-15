@@ -8,3 +8,9 @@
 
 * add_during_load: Time = 0.487872 ms. 带宽 = 262.363896 GB/s.
 
+* unroll_last_warp: Time = 0.345984 ms. 带宽 = 369.959292 GB/s.
+
+* completely_unroll: Time = 0.335776 ms. 带宽 = 381.206517 GB/s.
+
+* multi_add: Time = 0.275168 ms. 带宽 = 465.170366 GB/s.
+
