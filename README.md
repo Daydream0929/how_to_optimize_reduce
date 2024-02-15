@@ -6,3 +6,5 @@
 
 * no_bank_conflict: Time = 0.8944 ms. 带宽 = 143.112701 GB/s.
 
+* add_during_load: Time = 0.487872 ms. 带宽 = 262.363896 GB/s.
+
